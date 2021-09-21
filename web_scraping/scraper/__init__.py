@@ -1,4 +1,3 @@
-from datetime import datetime
 import os
 
 from .kompas import KompasScraper
@@ -10,15 +9,13 @@ Scraper = {
     "cnn": CNNScraper
 }
 
-def run_scraper(scraper_id, config, date_str, output_dir, **kwargs):
+def run_scraper(scraper_id, config, date, output_dir, **kwargs):
     """
     Running scraper
     """
 
-    date = datetime.strptime(date_str, "%Y-%m-%d") if (date_str) else datetime.now()
-    channels = config["channels"]
-
     print(f"Start running: {scraper_id} scraper")
+    channels = config["channels"]
     for channel in channels:
         scraper = Scraper[scraper_id](
             channel = channel["name"],
