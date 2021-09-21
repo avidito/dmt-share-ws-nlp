@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Data",
+        "description": "Operation to interract with historical scraping result dataset"
+    },
+    {
+        "name": "Log",
+        "description": "Operation to interract with model performance logs dataset"
+    }
+]

@@ -1,7 +1,7 @@
 import os
 import csv
 
-def aggregate_result(result_dir, level, drop_data=True):
+def aggregate_result(result_dir, level, file_prefix, drop_data=True):
     """
     Aggregate result data into single file by level
     """
@@ -9,7 +9,7 @@ def aggregate_result(result_dir, level, drop_data=True):
     # Agregration level: All category and all website
     if (level == "all"):
         # Get list of tmp results
-        agg_filename = "scraping_result-all.csv"
+        agg_filename = f"{file_prefix}-all.csv"
         list_of_result_filepath = [
             os.path.join(result_dir, filename)
             for filename in os.listdir(result_dir) if (filename != agg_filename)
