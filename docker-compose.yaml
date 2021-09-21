@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: dmt_share
+    ports:
+      - 5433:5432
