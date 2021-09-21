@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS ws.scraping_result;
 
 CREATE TABLE ws.scraping_result (
-  tilte VARCHAR PRIMARY KEY,
+  title VARCHAR PRIMARY KEY,
   website VARCHAR,
   channel VARCHAR,
   category VARCHAR,

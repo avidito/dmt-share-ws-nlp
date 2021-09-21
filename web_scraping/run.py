@@ -21,13 +21,12 @@ if __name__ == "__main__":
     config = get_config_json("config.json")
     driver = config["driver"]
     output_dir = config["output_dir"]
-    aggregation_level = config["aggregation_level"]
     scraper_config = config["scraper"]
 
     # Get arguments values
-    [date_str, result_prefix] = get_args(params_count = 2)
+    [date_str, filename] = get_args(params_count = 2)
     date = datetime.strptime(date_str, "%Y-%m-%d") if (date_str) else datetime.now()
-    result_prefix = result_prefix if (result_prefix) else "scraping_result"
+    filename = filename if (filename) else "scraping_result"
 
     # Create output_dir if not exists
     if (not os.path.exists(output_dir)):
@@ -51,4 +50,5 @@ if __name__ == "__main__":
     )
 
     # Aggregate result
-    aggregate_result(output_dir, aggregation_level, file_prefix=result_prefix)
+    print(f"Aggreating result into single file: {filename}.csv")
+    aggregate_result(output_dir, filename, add_date = True)
