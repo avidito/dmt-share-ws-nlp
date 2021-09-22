@@ -41,6 +41,24 @@
           "category": "teknologi",
           "url": "https://www.cnnindonesia.com/teknologi/indeks/8",
           "type": "query"
+        },
+        {
+          "name": "olahraga",
+          "general_category": "olahraga",
+          "url": "https://www.cnnindonesia.com/olahraga/indeks/7",
+          "type": "query"
+        },
+        {
+          "name": "gaya_hidup",
+          "general_category": "lifestyle",
+          "url": "https://www.cnnindonesia.com/gaya-hidup/indeks/10",
+          "type": "query"
+        },
+        {
+          "name": "hiburan",
+          "general_category": "entertainment",
+          "url": "https://www.cnnindonesia.com/hiburan/indeks/9",
+          "type": "query"
         }
       ]
     }

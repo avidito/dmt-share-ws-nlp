@@ -21,7 +21,7 @@ class CNNScraper(Scraper):
 
         while(1):
             try:
-                load_more = driver.find_element_by_class_name("loading")
+                load_more = driver.find_element_by_class_name("btn__more")
                 load_more.click()
                 print("Add more result by clicking 'Selanjutnya' button")
                 time.sleep(5)
