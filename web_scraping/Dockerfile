@@ -19,8 +19,8 @@ RUN apt-get -y update
 RUN apt-get install -y google-chrome-stable
 
 ########## Setting up Web Scraper Project ##########
-COPY . /home/scraper
-WORKDIR /home/scraper
+COPY . /app/scraper
+WORKDIR /app/scraper
 
 # Remove unnecessary files/directory
 RUN rm Dockerfile

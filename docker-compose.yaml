@@ -1,11 +1,26 @@
 version: "3.7"
 
 services:
-  db:
+  postgres:
     image: postgres:13
+    ports:
+      - 5433:5432
+    networks:
+      - scraper_network
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: dmt_share
-    ports:
-      - 5433:5432
+    volumes:
+      - ./data:/landing
+
+  scraper:
+    image: scraper:1
+    networks:
+      - scraper_network
+    volumes:
+      - ./data:/app/scraper/result
+
+networks:
+  scraper_network:
+    name: scraper_network
