@@ -1,17 +1,21 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-# Get selenium driver
-def get_driver(driver, headless=True):
+def get_driver():
+    """
+    Getting selenium driver.
+    """
+    # Set up chrome options (compatible to run on container)
     options = Options()
-    options.headless = True
-    options.add_argument('log-level=3')
-    caps = DesiredCapabilities.CHROME
+    options.add_argument("log-level=3")
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(
-        executable_path = driver,
-        options = options,
-        desired_capabilities = caps
-    )
+    chrome_prefs = {}
+    options.experimental_options["prefs"] = chrome_prefs
+    chrome_prefs["profile.default_content_settings"] = {"images": 2}
+
+    # Create driver
+    driver = webdriver.Chrome(options = options)
     return driver

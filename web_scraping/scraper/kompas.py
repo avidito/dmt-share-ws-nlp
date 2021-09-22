@@ -1,11 +1,11 @@
 from shared.module.scraper import Scraper
 
 class KompasScraper(Scraper):
-    def __init__(self, channel, general_category, **kwargs):
+    def __init__(self, channel, category, **kwargs):
         super().__init__(**kwargs)
         self.website = "kompas"
         self.channel = channel
-        self.general_category = general_category
+        self.category = category
 
     def extract_info(self, current_url, page):
         article_list = page.find_all("div", class_="article__list")
@@ -13,12 +13,12 @@ class KompasScraper(Scraper):
         list_of_info = []
         for article in article_list:
             info = {
+                "title": article.find("a", class_="article__link").text,
                 "website": self.website,
                 "channel": self.channel,
-                "general_category": self.general_category,
-                "title": article.find("a", class_="article__link").text,
-                "url": article.find("a", class_="article__link").get("href"),
-                "category": article.find("div", class_="article__subtitle").text
+                "category": self.category,
+                "native_category": article.find("div", class_="article__subtitle").text,
+                "url": article.find("a", class_="article__link").get("href")
             }
             list_of_info.append(info)
 
