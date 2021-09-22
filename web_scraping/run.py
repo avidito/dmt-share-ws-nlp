@@ -33,12 +33,12 @@ if __name__ == "__main__":
         os.makedirs(output_dir)
 
     # Run kompas scraper
-    run_scraper(
-        scraper_id = "kompas",
-        config = scraper_config["kompas"],
-        date = date,
-        output_dir = output_dir
-    )
+    # run_scraper(
+    #     scraper_id = "kompas",
+    #     config = scraper_config["kompas"],
+    #     date = date,
+    #     output_dir = output_dir
+    # )
 
     # Run cnn scraper
     run_scraper(

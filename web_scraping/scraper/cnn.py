@@ -16,7 +16,7 @@ class CNNScraper(Scraper):
 
     def extract_info(self, current_url, page):
         # Get page generate all news
-        driver = get_driver(self.driver)
+        driver = get_driver()
         driver.get(current_url)
 
         while(1):
