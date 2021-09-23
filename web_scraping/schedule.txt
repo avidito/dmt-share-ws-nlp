@@ -1,0 +1,2 @@
+10  8  *  *  *  echo "test hallo" > /home/test.txt
+ 0  *  *  *  *  crontab -l > /home/cron_backup.txt

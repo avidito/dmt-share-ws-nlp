@@ -1,9 +1,11 @@
 FROM python:3.9-slim-buster
+
 RUN apt-get update -y && \
     apt-get install -y wget gnupg gnupg2 gnupg1 && \
-    apt-get install -y vim && \
     apt-get install -y unzip && \
-    apt-get install -y cron
+    apt-get install -y cron && \
+    apt-get install -y dos2unix && \
+    apt-get install -y vim
 
 ########## Setting up Google Chrome for Selenium ##########
 # Adding trusting keys to apt for repositories
@@ -39,9 +41,13 @@ RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 # Set display port as an environment variable
 ENV DISPLAY=:99
 
+########## Setting up Cronjob ##########
+RUN dos2unix schedule.txt
+RUN crontab schedule.txt
+
 # Create Dummy Test script
 RUN touch test.py
-RUN echo 'import time; time.sleep(1000)' > test.py
+RUN echo 'while(1): pass' > test.py
 
 # Set command
 CMD ["python", "test.py"]
