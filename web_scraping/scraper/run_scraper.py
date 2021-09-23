@@ -53,4 +53,4 @@ if __name__ == "__main__":
 
     # Aggregate result
     print(f"Aggreating result into single file: {filename}.csv")
-    aggregate_result(output_dir, filename, add_date = True)
+    aggregate_result(output_dir, filename)

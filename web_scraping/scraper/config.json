@@ -1,5 +1,4 @@
 {
-  "driver": "shared/chromedriver.exe",
   "output_dir": "result",
   "scraper": {
     "kompas": {

@@ -5,6 +5,7 @@ RUN apt-get update -y && \
     apt-get install -y unzip && \
     apt-get install -y cron && \
     apt-get install -y dos2unix && \
+    apt-get install -y postgresql-client && \
     apt-get install -y vim
 
 ########## Setting up Google Chrome for Selenium ##########
