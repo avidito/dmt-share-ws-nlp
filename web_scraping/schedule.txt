@@ -1,2 +1,5 @@
-10  8  *  *  *  echo "test hallo" > /home/test.txt
- 0  *  *  *  *  crontab -l > /home/cron_backup.txt
+#Scraper
+0 5 * * *  sh /app/scraper/run_scraper.sh > /logs/run_scraper.txt
+
+#Backup Crontab
+0 * * * *  crontab -l > /home/cron_backup.txt

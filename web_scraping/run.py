@@ -18,7 +18,9 @@ from shared.module.aggregator import aggregate_result
 
 if __name__ == "__main__":
     # Get configuration values
-    config = get_config_json("config.json")
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    config_path = os.path.join(script_dir, "config.json")
+    config = get_config_json(config_path)
     driver = config["driver"]
     output_dir = config["output_dir"]
     scraper_config = config["scraper"]
@@ -33,12 +35,12 @@ if __name__ == "__main__":
         os.makedirs(output_dir)
 
     # Run kompas scraper
-    # run_scraper(
-    #     scraper_id = "kompas",
-    #     config = scraper_config["kompas"],
-    #     date = date,
-    #     output_dir = output_dir
-    # )
+    run_scraper(
+        scraper_id = "kompas",
+        config = scraper_config["kompas"],
+        date = date,
+        output_dir = output_dir
+    )
 
     # Run cnn scraper
     run_scraper(

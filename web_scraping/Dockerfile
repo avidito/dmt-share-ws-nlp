@@ -23,6 +23,7 @@ RUN apt-get install -y google-chrome-stable
 ########## Setting up Web Scraper Project ##########
 COPY . /app/scraper
 WORKDIR /app/scraper
+RUN mkdir /logs/
 
 # Remove unnecessary files/directory
 RUN rm Dockerfile
@@ -42,7 +43,7 @@ RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 ENV DISPLAY=:99
 
 ########## Setting up Cronjob ##########
-RUN dos2unix schedule.txt
+RUN dos2unix schedule.txt run_scraper.sh
 RUN crontab schedule.txt
 
 # Create Dummy Test script
