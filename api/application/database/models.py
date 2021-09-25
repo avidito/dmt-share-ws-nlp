@@ -14,4 +14,4 @@ class ScrapingResult(Base):
     category = Column(String)
     native_category = Column(String)
     url = Column(String)
-    load_dt Column(DateTime)
+    load_dt = Column(DateTime)
