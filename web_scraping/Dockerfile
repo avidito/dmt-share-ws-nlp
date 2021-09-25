@@ -24,6 +24,7 @@ RUN apt-get install -y google-chrome-stable
 COPY . /app/web_scraping
 WORKDIR /app/web_scraping
 RUN mkdir /logs/
+RUN mkdir /backup/
 
 # Remove unnecessary files/directory
 RUN rm Dockerfile
