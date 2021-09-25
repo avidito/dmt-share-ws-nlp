@@ -21,6 +21,6 @@ echo "Running Scraper with date: $vjob_date"
 python /app/web_scraping/scraper/run_scraper.py $vjob_date
 
 echo "Loading Scraper result to database"
-
+bash /app/web_scraping/loader/run_loader.sh
 
 exit 0
