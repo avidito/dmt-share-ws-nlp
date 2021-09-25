@@ -12,13 +12,14 @@ services:
     volumes:
       - ./database/_container_startup_ddl/:/docker-entrypoint-initdb.d/
       - ./database/ddl/:/ddl
+      - ./database/data-volume:/var/lib/postgresql/data
     networks:
       - dmt_network
 
   scraper:
     image: scraper:1
     volumes:
-      - ./database:/app/database
+      - ./web_scraping/scraper/config.json:/app/web_scraping/scraper/config.json
     networks:
       - dmt_network
     depends_on:
