@@ -15,3 +15,4 @@ class ScrapingResult(Base):
     native_category = Column(String)
     url = Column(String)
     load_dt = Column(DateTime)
+    publish_dt = Column(DateTime)

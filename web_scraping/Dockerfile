@@ -25,6 +25,7 @@ COPY . /app/web_scraping
 WORKDIR /app/web_scraping
 RUN mkdir /logs/
 RUN mkdir /backup/
+RUN mkdir /backup/scraping_result/
 
 # Remove unnecessary files/directory
 RUN rm Dockerfile

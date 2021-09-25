@@ -7,5 +7,6 @@ CREATE TABLE ws.scraping_result (
   category VARCHAR,
   native_category VARCHAR,
   url VARCHAR,
+  publish_dt TIMESTAMP,
   load_dt TIMESTAMP
 );

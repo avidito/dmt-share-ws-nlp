@@ -13,8 +13,8 @@ from datetime import datetime
 
 from job import scraping_job
 
-from utils.params import get_args, get_config_json
-from utils.aggregator import aggregate_result
+from shared.params import get_args, get_config_json
+from shared.aggregator import aggregate_result
 
 if __name__ == "__main__":
     # Get configuration values
@@ -35,12 +35,12 @@ if __name__ == "__main__":
         os.makedirs(output_dir)
 
     # Run kompas scraper
-    # scraping_job(
-    #     scraper_id = "kompas",
-    #     config = scraper_config["kompas"],
-    #     date = date,
-    #     output_dir = output_dir
-    # )
+    scraping_job(
+        scraper_id = "kompas",
+        config = scraper_config["kompas"],
+        date = date,
+        output_dir = output_dir
+    )
 
     # Run cnn scraper
     scraping_job(
