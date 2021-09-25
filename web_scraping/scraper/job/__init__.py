@@ -2,16 +2,17 @@ import os
 
 from .kompas import KompasScraper
 from .cnn import CNNScraper
-from shared.module.params import get_date_params
+
+from utils.params import get_date_params
 
 Scraper = {
     "kompas": KompasScraper,
     "cnn": CNNScraper
 }
 
-def run_scraper(scraper_id, config, date, output_dir, **kwargs):
+def scraping_job(scraper_id, config, date, output_dir, **kwargs):
     """
-    Running scraper
+    Running scraper job
     """
 
     print(f"Start running: {scraper_id} scraper")

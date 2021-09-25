@@ -1,6 +1,5 @@
 *-env
 result/
 tmp/
-data/
 
 __pycache__

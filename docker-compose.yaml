@@ -21,6 +21,8 @@ services:
       - scraper_network
     volumes:
       - ./database:/app/database
+    depends_on:
+      - database
 
 networks:
   scraper_network:
