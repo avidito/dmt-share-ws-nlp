@@ -1,5 +1,5 @@
 #Scraper
-0 5 * * *  sh /app/scraper/run_scraper.sh > /logs/run_scraper.txt
+0 5 * * *  sh /app/scraper/job_web_scraping.sh > /logs/job_web_scraping.txt
 
 #Backup Crontab
-0 * * * *  crontab -l > /home/cron_backup.txt
+0 */6 * * *  crontab -l > /backup/cron_schedule.txt

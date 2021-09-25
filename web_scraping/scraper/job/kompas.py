@@ -1,9 +1,10 @@
-from utils.scraper import Scraper
+from shared.scraper import Scraper
 
 class KompasScraper(Scraper):
-    def __init__(self, channel, category, **kwargs):
+    def __init__(self, date_str, channel, category, **kwargs):
         super().__init__(**kwargs)
         self.website = "kompas"
+        self.date_str = date_str
         self.channel = channel
         self.category = category
 
@@ -18,7 +19,8 @@ class KompasScraper(Scraper):
                 "channel": self.channel,
                 "category": self.category,
                 "native_category": article.find("div", class_="article__subtitle").text,
-                "url": article.find("a", class_="article__link").get("href")
+                "url": article.find("a", class_="article__link").get("href"),
+                "publish_dt": self.date_str
             }
             list_of_info.append(info)
 

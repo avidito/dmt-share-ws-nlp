@@ -5,8 +5,6 @@ services:
     image: postgres:13
     ports:
       - 5433:5432
-    networks:
-      - scraper_network
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -14,16 +12,27 @@ services:
     volumes:
       - ./database/_container_startup_ddl/:/docker-entrypoint-initdb.d/
       - ./database/ddl/:/ddl
+    networks:
+      - dmt_network
 
   scraper:
     image: scraper:1
-    networks:
-      - scraper_network
     volumes:
       - ./database:/app/database
+    networks:
+      - dmt_network
+    depends_on:
+      - database
+
+  api:
+    image: api:1
+    ports:
+      - 8000:8000
+    networks:
+      - dmt_network
     depends_on:
       - database
 
 networks:
-  scraper_network:
-    name: scraper_network
+  dmt_network:
+    name: dmt_network

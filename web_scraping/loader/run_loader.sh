@@ -14,7 +14,7 @@ password='admin'
 database='dmt_share'
 result_dir='/app/web_scraping/result/scraping_result.csv'
 dml_dir='/app/web_scraping/loader/dml'
-upload_query=$(cat "$dml_dir/load_from_csv_to_src.sql")
+upload_query=$(cat "$dml_dir/load_from_csv_to_cdc.sql")
 
 ##### Main #####
 PGPASSWORD=$password psql -h $hostname -U $user -d $database -c "$upload_query" -q

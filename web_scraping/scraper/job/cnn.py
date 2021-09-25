@@ -1,15 +1,16 @@
 import time
 
 from bs4 import BeautifulSoup
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 
-from utils.scraper import Scraper
-from utils.selenium import get_driver
+from shared.scraper import Scraper
+from shared.selenium import get_driver
 
 class CNNScraper(Scraper):
-    def __init__(self, channel, category, driver, **kwargs):
+    def __init__(self, date_str, channel, category, driver, **kwargs):
         super().__init__(**kwargs)
-        self.website = "kompas"
+        self.website = "cnn"
+        self.date_str = date_str
         self.channel = channel
         self.category = category
         self.driver = driver
@@ -27,6 +28,8 @@ class CNNScraper(Scraper):
                 time.sleep(5)
             except NoSuchElementException as e:
                 break
+            except ElementClickInterceptedException as e:
+                break
 
         new_page = BeautifulSoup(driver.page_source, "lxml")
         driver.quit()
@@ -42,7 +45,8 @@ class CNNScraper(Scraper):
                 "channel": self.channel,
                 "category": self.category,
                 "native_category": article.find("span", class_="kanal").text,
-                "url": article.find("a").get("href")
+                "url": article.find("a").get("href"),
+                "publish_dt": self.date_str
             }
             list_of_info.append(info)
 

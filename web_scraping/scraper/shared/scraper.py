@@ -5,13 +5,12 @@ import csv
 import os
 
 class Scraper:
-    def __init__(self, start_url=None, start_url_params=None, website="", delay=10, output_dir="", date=None, tz_info=None):
+    def __init__(self, start_url=None, start_url_params=None, website="", delay=10, output_dir=""):
         self.start_url = start_url
         self.start_url_params = start_url_params
         self.website = website
         self.delay = delay
         self.output_dir = output_dir
-        self.tz_info = tz_info
 
         self.info = []
         self.info_cnt = 0

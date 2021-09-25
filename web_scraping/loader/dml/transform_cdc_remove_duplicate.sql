@@ -15,7 +15,8 @@ SELECT
   channel,
   category,
   native_category,
-  url
+  url,
+  publish_dt
 FROM dup_check_tbl
 WHERE rownumber = 1;
 
@@ -24,6 +25,3 @@ TRUNCATE TABLE cdc.scraping_result;
 
 INSERT INTO cdc.scraping_result
 SELECT * FROM tmp.scraping_result;
-
--- Drop tmp table
-DROP TABLE IF EXISTS tmp.scraping_result;

@@ -6,5 +6,6 @@ CREATE TABLE cdc.scraping_result (
   channel VARCHAR,
   category VARCHAR,
   native_category VARCHAR,
-  url VARCHAR
+  url VARCHAR,
+  publish_dt TIMESTAMP
 );
