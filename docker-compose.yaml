@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  postgres:
+  database:
     image: postgres:13
     ports:
       - 5433:5432
@@ -12,14 +12,17 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: dmt_share
     volumes:
-      - ./data:/landing
+      - ./database/_container_startup_ddl/:/docker-entrypoint-initdb.d/
+      - ./database/ddl/:/ddl
 
   scraper:
     image: scraper:1
     networks:
       - scraper_network
     volumes:
-      - ./data:/app/scraper/result
+      - ./database:/app/database
+    depends_on:
+      - database
 
 networks:
   scraper_network:

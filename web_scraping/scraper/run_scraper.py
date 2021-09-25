@@ -11,17 +11,19 @@
 import os
 from datetime import datetime
 
-from scraper import run_scraper
+from job import scraping_job
 
-from shared.module.params import get_args, get_config_json
-from shared.module.aggregator import aggregate_result
+from utils.params import get_args, get_config_json
+from utils.aggregator import aggregate_result
 
 if __name__ == "__main__":
     # Get configuration values
-    config = get_config_json("config.json")
-    driver = config["driver"]
-    output_dir = config["output_dir"]
-    scraper_config = config["scraper"]
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    config_path = os.path.join(script_dir, "config.json")
+    config = get_config_json(config_path)
+    driver = config.get("driver")
+    output_dir = config.get("output_dir")
+    scraper_config = config.get("scraper")
 
     # Get arguments values
     [date_str, filename] = get_args(params_count = 2)
@@ -33,7 +35,7 @@ if __name__ == "__main__":
         os.makedirs(output_dir)
 
     # Run kompas scraper
-    # run_scraper(
+    # scraping_job(
     #     scraper_id = "kompas",
     #     config = scraper_config["kompas"],
     #     date = date,
@@ -41,7 +43,7 @@ if __name__ == "__main__":
     # )
 
     # Run cnn scraper
-    run_scraper(
+    scraping_job(
         scraper_id = "cnn",
         config = scraper_config["cnn"],
         date = date,
@@ -51,4 +53,4 @@ if __name__ == "__main__":
 
     # Aggregate result
     print(f"Aggreating result into single file: {filename}.csv")
-    aggregate_result(output_dir, filename, add_date = True)
+    aggregate_result(output_dir, filename)

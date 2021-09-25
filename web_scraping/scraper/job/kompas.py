@@ -1,4 +1,4 @@
-from shared.module.scraper import Scraper
+from utils.scraper import Scraper
 
 class KompasScraper(Scraper):
     def __init__(self, channel, category, **kwargs):

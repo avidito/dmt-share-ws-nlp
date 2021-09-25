@@ -3,8 +3,8 @@ import time
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import NoSuchElementException
 
-from shared.module.scraper import Scraper
-from shared.module.selenium import get_driver
+from utils.scraper import Scraper
+from utils.selenium import get_driver
 
 class CNNScraper(Scraper):
     def __init__(self, channel, category, driver, **kwargs):
