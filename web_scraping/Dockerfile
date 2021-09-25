@@ -35,7 +35,7 @@ RUN rm -rf *-env/
 RUN find . -type d -name '__pycache__' -exec rm -r {} \; -prune
 
 # Install python libraries
-RUN pip install -r requirements.txt
+RUN pip install --default-timeout=100 -r requirements.txt
 
 # Donwload and unzip Chromedriver (using version 93.0.4577.63 for Chromer version 93)
 RUN wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/93.0.4577.63/chromedriver_linux64.zip
