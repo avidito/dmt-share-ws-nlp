@@ -18,13 +18,13 @@ fi
 
 ##### Main #####
 echo "Running Scraper with date: $job_date"
-python /app/web_scraping/scraper/run_scraper.py $job_date
+python $PROJECT_DIR/scraper/run_scraper.py $job_date
 
 echo "Backup result"
-cp /app/web_scraping/result/scraping_result.csv /backup/scraping_result-$job_date.csv
+cp $RESULT_DIR/scraping_result.csv "$BACKUP_DIR/scraping_result-$job_date.csv"
 
 echo "Loading Scraper result to database"
-bash /app/web_scraping/loader/run_loader.sh
-rm /app/web_scraping/result/scraping_result.csv
+bash $PROJECT_DIR/loader/run_loader.sh
+rm $RESULT_DIR/scraping_result.csv
 
 exit 0

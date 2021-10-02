@@ -1,3 +1,5 @@
+SET client_min_messages TO WARNING;
+
 DROP SCHEMA IF EXISTS cdc;
 CREATE SCHEMA cdc;
 
