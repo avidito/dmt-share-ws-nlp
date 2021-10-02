@@ -8,16 +8,18 @@ RUN apt-get update -y && \
     apt-get install -y vim
 
 ########## Setup Scraper Project ##########
-COPY . /app/web_scraping
 WORKDIR /app/web_scraping
+COPY scraper scraper/
+COPY loader loader/
+COPY job_web_scraping.sh .
+COPY requirements.txt .
+COPY schedule.txt .
+RUN rm scraper/chromedriver.exe
+RUN find . -type d -name '__pycache__' -exec rm -r {} \; -prune
+
 RUN mkdir /logs/
 RUN mkdir /backup/
 RUN mkdir /backup/scraping_result/
-RUN rm Dockerfile
-RUN rm scraper/chromedriver.exe
-RUN rm -rf result/
-RUN rm -rf *-env/
-RUN find . -type d -name '__pycache__' -exec rm -r {} \; -prune
 
 ENV PROJECT_DIR=/app/web_scraping
 ENV RESULT_DIR=/app/web_scraping/result
