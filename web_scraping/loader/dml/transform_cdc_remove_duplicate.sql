@@ -25,3 +25,5 @@ TRUNCATE TABLE cdc.scraping_result;
 
 INSERT INTO cdc.scraping_result
 SELECT * FROM tmp.scraping_result;
+
+DROP TABLE IF EXISTS tmp.scraping_result;
