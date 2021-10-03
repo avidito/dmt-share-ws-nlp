@@ -17,7 +17,7 @@ services:
       - dmt_network
 
   scraper:
-    image: scraper:1
+    image: avidito/dmt_scraper:1
     volumes:
       - ./web_scraping/scraper/config.json:/app/web_scraping/scraper/config.json
     networks:
@@ -26,7 +26,7 @@ services:
       - database
 
   api:
-    image: api:1
+    image: avidito/dmt_api:1
     ports:
       - 8000:8000
     networks:
