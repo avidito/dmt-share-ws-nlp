@@ -14,7 +14,7 @@ $job_date=$args[0]
 
 if ( $job_date -eq $null) {
   Write-Host "job_date wasn't provided. Use default value."
-  $job_date=(Get-Date -UFormat "%Y-%m-%d")
+  $job_date=(Get-Date).AddDays(-1).ToString("yyyy-MM-dd")
 }
 
 ##### Main #####
