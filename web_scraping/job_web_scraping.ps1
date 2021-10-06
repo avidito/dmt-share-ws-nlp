@@ -7,25 +7,27 @@
 ##############################################################
 
 ##### Variables #####
-$PROJECT_DIR=$env:SCRAPER_PROJECT_DIR
-$RESULT_DIR=$env:SCRAPER_RESULT_DIR
-$BACKUP_DIR=$env:SCRAPER_BACKUP_DIR
-$job_date=$args[0]
+$project_dir = $env:SCRAPER_PROJECT_DIR
+$result_dir = $env:SCRAPER_RESULT_DIR
+$backup_dir = $env:SCRAPER_BACKUP_DIR
+$job_date = $args[0]
 
-if ( $job_date -eq $null) {
+if ($job_date -eq $null) {
   Write-Host "job_date wasn't provided. Use default value."
-  $job_date=(Get-Date -UFormat "%Y-%m-%d")
+  $job_date=(Get-Date).AddDays(-1).ToString("yyyy-MM-dd")
 }
 
 ##### Main #####
 Write-Host "Running Scraper with date: $job_date"
-python $PROJECT_DIR/scraper/run_scraper.py $job_date
-
-Write-Host "Backup result"
-Copy-Item $RESULT_DIR/scraping_result.csv -Destination "$BACKUP_DIR/scraping_result-$job_date.csv"
+python "$PROJECT_DIR\scraper\run_scraper.py" $job_date
 
 Write-Host "Loading Scraper result to database"
-& $PROJECT_DIR/loader/run_loader.ps1
-Remove-Item $RESULT_DIR/scraping_result.csv
+if (Test-Path -Path "$result_dir\scraping_result.csv") {
+  Copy-Item "$result_dir\scraping_result.csv" -Destination "$backup_dir/scraping_result-$job_date.csv"
+  & "$project_dir\loader\run_loader.ps1"
+  Remove-Item "$result_dir\scraping_result.csv"
+} else {
+  Write-Host "$result_dir\scraping_result.csv is not exists"
+}
 
 exit 0

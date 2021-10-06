@@ -1,4 +1,4 @@
 \copy cdc.scraping_result
-FROM '/app/web_scraping/result/scraping_result.csv'
+FROM '{{result_dir}}scraping_result.csv'
 DELIMITER ','
 CSV HEADER;

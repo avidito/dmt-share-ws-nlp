@@ -1,0 +1,5 @@
+CREATE DATABASE dmt_share;
+
+CREATE ROLE admin WITH LOGIN PASSWORD 'admin';
+
+GRANT ALL PRIVILEGES ON DATABASE dmt_share TO admin;
