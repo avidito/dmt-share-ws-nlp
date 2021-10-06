@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ##############################################################
 # Program: Load scraping result to Postgres database.

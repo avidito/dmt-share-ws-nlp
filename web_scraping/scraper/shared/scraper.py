@@ -61,7 +61,7 @@ class Scraper:
         print(f"Requesting Page: {url} | Status Code: {status}")
         time.sleep(self.delay)
 
-        return req.url, BeautifulSoup(req.content, features="lxml")
+        return req.url, BeautifulSoup(req.content, features="html.parser")
 
     def extract_info(self, current_url, page):
         """

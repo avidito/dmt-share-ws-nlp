@@ -1,8 +1,13 @@
-FROM python:3.9-slim-buster
+FROM python:3.8.3-slim-buster
 
-RUN apt-get update -y
+RUN apt-get update -y && \
+    apt-get install -y gcc musl-dev && \
+    apt-get install -y build-essential && \
+    apt-get install -y python-dev python3-dev && \
+    apt-get install -y libpq-dev
 
 ########## Setting up API Project ##########
+ENV TZ=Asia/Jakarta
 COPY . /app/api/
 WORKDIR /app/api/
 
