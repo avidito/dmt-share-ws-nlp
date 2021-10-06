@@ -35,19 +35,21 @@ class CNNScraper(Scraper):
         driver.quit()
 
         # Extract all news info
-        article_list = new_page.find("div", class_="media_rows").find_all("article")
-
         list_of_info = []
-        for article in article_list:
-            info = {
-                "title": article.find("h2", class_="title").text,
-                "website": self.website,
-                "channel": self.channel,
-                "category": self.category,
-                "native_category": article.find("span", class_="kanal").text,
-                "url": article.find("a").get("href"),
-                "publish_dt": self.date_str
-            }
-            list_of_info.append(info)
+        article_section = new_page.find("div", class_="media_rows")
+        if (article_section):
+            article_list = article_section.find_all("article")
+
+            for article in article_list:
+                info = {
+                    "title": article.find("h2", class_="title").text,
+                    "website": self.website,
+                    "channel": self.channel,
+                    "category": self.category,
+                    "native_category": article.find("span", class_="kanal").text,
+                    "url": article.find("a").get("href"),
+                    "publish_dt": self.date_str
+                }
+                list_of_info.append(info)
 
         return list_of_info
