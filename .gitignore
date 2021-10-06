@@ -2,5 +2,6 @@
 result/
 tmp/
 data-volume/
+backup/
 
 __pycache__
