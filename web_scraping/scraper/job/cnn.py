@@ -3,26 +3,22 @@ import time
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 
-from shared.scraper import Scraper
+from shared.scraper import SeleniumScraper
 from shared.selenium import get_driver
 
-class CNNScraper(Scraper):
-    def __init__(self, date_str, channel, category, driver, **kwargs):
+class CNNScraper(SeleniumScraper):
+    def __init__(self, date_str, channel, category, **kwargs):
         super().__init__(**kwargs)
         self.website = "cnn"
         self.date_str = date_str
         self.channel = channel
         self.category = category
-        self.driver = driver
 
-    def extract_info(self, current_url, page):
+    def extract_info(self):
         # Get page generate all news
-        driver = get_driver()
-        driver.get(current_url)
-
         while(1):
             try:
-                load_more = driver.find_element_by_class_name("btn__more")
+                load_more = self.driver.find_element_by_class_name("btn__more")
                 load_more.click()
                 print("Add more result by clicking 'Selanjutnya' button")
                 time.sleep(5)
@@ -31,8 +27,7 @@ class CNNScraper(Scraper):
             except ElementClickInterceptedException as e:
                 break
 
-        new_page = BeautifulSoup(driver.page_source, "lxml")
-        driver.quit()
+        new_page = BeautifulSoup(self.driver.page_source, "lxml")
 
         # Extract all news info
         list_of_info = []
