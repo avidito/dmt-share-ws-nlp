@@ -9,9 +9,8 @@ class KompasScraper(Scraper):
         self.category = category
 
     def extract_info(self, current_url, page):
-        article_list = page.find_all("div", class_="article__list")
-
         list_of_info = []
+        article_list = page.find_all("div", class_="article__list")
         for article in article_list:
             info = {
                 "title": article.find("a", class_="article__link").text,
