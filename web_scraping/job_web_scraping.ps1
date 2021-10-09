@@ -19,11 +19,11 @@ if ($job_date -eq $null) {
 
 ##### Main #####
 Write-Host "Running Scraper with date: $job_date"
-python "$PROJECT_DIR\scraper\run_scraper.py" $job_date
+python "$project_dir\scraper\run_scraper.py" $job_date
 
 Write-Host "Loading Scraper result to database"
 if (Test-Path -Path "$result_dir\scraping_result.csv") {
-  Copy-Item "$result_dir\scraping_result.csv" -Destination "$backup_dir/scraping_result-$job_date.csv"
+  Copy-Item "$result_dir\scraping_result.csv" -Destination "$backup_dir\scraping_result-$job_date.csv"
   & "$project_dir\loader\run_loader.ps1"
   Remove-Item "$result_dir\scraping_result.csv"
 } else {

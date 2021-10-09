@@ -29,8 +29,8 @@
           "url": "https://www.kompas.com/hype/search/",
           "type": "path"
         }
-    ]
-  },
+      ]
+    },
     "cnn": {
       "time_format": "%Y/%m/%d",
       "multipage": false,
