@@ -1,8 +1,11 @@
-import requests
-import time
-from bs4 import BeautifulSoup
-import csv
 import os
+import time
+import csv
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urlencode
+
+from .selenium import get_driver
 
 class Scraper:
     def __init__(self, start_url=None, start_url_params=None, website="", delay=10, output_dir=""):
@@ -100,3 +103,42 @@ class Scraper:
                 writer = csv.writer(file)
                 writer.writerow(header)
                 writer.writerows(rows)
+
+class SeleniumScraper(Scraper):
+    def __init__(self, driver, **kwargs):
+        super().__init__(**kwargs)
+        self.driver = get_driver()
+
+    def run(self, start_url=None, export=True, filename="result.csv", multipage=False):
+        """
+        Starting web scraping process
+        """
+
+        # Check minimum parameters to start scraping
+        if (start_url is None) and (self.start_url is None):
+            raise ValueError("'start_url' must be defined!")
+        start_url = start_url if (start_url) else self.start_url
+
+        # Start extracting information
+        self.navigate_page(start_url, **self.start_url_params)
+        info = self.extract_info()
+        self.save_info(info)
+
+        self.driver.quit()
+
+        # Export data
+        if (export):
+            self.export_data(filename)
+
+    ##### Scraping Method #####
+    def navigate_page(self, url, path=None, query=None):
+        """
+        Page navigation with Selenium method
+        """
+
+        url = requests.compat.urljoin(url, path) if (path) else url
+        url_with_params = url + "?" + urlencode(query)
+        self.driver.get(url_with_params)
+
+        print(f"Navigating to Page: {url_with_params}")
+        time.sleep(self.delay)

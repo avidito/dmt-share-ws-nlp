@@ -9,6 +9,9 @@
 ##############################################################
 
 ##### Variables #####
+project_dir=$SCRAPER_PROJECT_DIR
+result_dir=$SCRAPER_RESULT_DIR
+backup_dir=$SCRAPER_BACKUP_DIR
 job_date=$1
 
 if [[ $job_date = '' ]]; then
@@ -18,13 +21,15 @@ fi
 
 ##### Main #####
 echo "Running Scraper with date: $job_date"
-python $PROJECT_DIR/scraper/run_scraper.py $job_date
-
-echo "Backup result"
-cp $RESULT_DIR/scraping_result.csv "$BACKUP_DIR/scraping_result-$job_date.csv"
+python "$project_dir/scraper/run_scraper.py" $job_date
 
 echo "Loading Scraper result to database"
-bash $PROJECT_DIR/loader/run_loader.sh
-rm $RESULT_DIR/scraping_result.csv
+if test -f "$result_dir/scraping_result.csv"; then
+  cp "$result_dir/scraping_result.csv" "$backup_dir/scraping_result-$job_date.csv"
+  bash "$project_dir/loader/run_loader.sh"
+  rm "$result_dir/scraping_result.csv"
+else
+  echo "$result_dir/scraping_result.csv is not exists"
+fi
 
 exit 0
