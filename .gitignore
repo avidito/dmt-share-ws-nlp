@@ -4,4 +4,6 @@ tmp/
 data-volume/
 backup/
 
+chromedriver
+
 __pycache__

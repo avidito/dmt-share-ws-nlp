@@ -125,7 +125,7 @@ class SeleniumScraper(Scraper):
         self.save_info(info)
 
         self.driver.quit()
-        
+
         # Export data
         if (export):
             self.export_data(filename)
@@ -137,7 +137,7 @@ class SeleniumScraper(Scraper):
         """
 
         url = requests.compat.urljoin(url, path) if (path) else url
-        url_with_params = url + urlencode(query)
+        url_with_params = url + "?" + urlencode(query)
         self.driver.get(url_with_params)
 
         print(f"Navigating to Page: {url_with_params}")

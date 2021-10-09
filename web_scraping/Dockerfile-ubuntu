@@ -1,0 +1,47 @@
+FROM python:3.9-slim-buster
+
+RUN apt-get update -y && \
+    apt-get install -y wget gnupg gnupg2 gnupg1 && \
+    apt-get install -y unzip && \
+    apt-get install -y cron && \
+    apt-get install -y postgresql-client && \
+    apt-get install -y curl
+
+########## Setup Selenium with Google Chrome ##########
+ENV CHROMEDRIVER_DIR /chromedriver
+RUN mkdir $CHROMEDRIVER_DIR
+ENV PATH $CHROMEDRIVER_DIR:$PATH
+
+# Add Google Chrome from Google Repo
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+RUN apt-get -y update
+RUN apt-get install -y google-chrome-stable
+
+# Download Chromedriver
+RUN wget -q --continue -P $CHROMEDRIVER_DIR http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip
+RUN unzip $CHROMEDRIVER_DIR/chromedriver* -d $CHROMEDRIVER_DIR
+
+########## Setup Scraper Project ##########
+ENV TZ = Asia/Jakarta
+ENV SCRAPER_PROJECT_DIR /app/web_scraping
+ENV SCRAPER_RESULT_DIR /app/web_scraping/result
+ENV SCRAPER_BACKUP_DIR /backup
+ENV SCRAPER_DATABASE_HOST database
+
+WORKDIR /app/web_scraping
+COPY scraper scraper/
+COPY loader loader/
+COPY job_web_scraping.sh .
+COPY requirements.txt .
+COPY schedule.txt .
+RUN find . -type d -name '__pycache__' -exec rm -r {} \; -prune
+
+RUN mkdir /logs/
+RUN mkdir /backup/
+
+RUN pip install -r requirements.txt
+RUN crontab schedule.txt
+
+########## Keep Container Running ##########
+CMD ["tail", "-f", "/dev/null"]

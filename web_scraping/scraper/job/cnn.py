@@ -27,7 +27,7 @@ class CNNScraper(SeleniumScraper):
             except ElementClickInterceptedException as e:
                 break
 
-        new_page = BeautifulSoup(self.driver.page_source, "lxml")
+        new_page = BeautifulSoup(self.driver.page_source, features="html.parser")
 
         # Extract all news info
         list_of_info = []
