@@ -46,4 +46,4 @@ RUN chmod 0644 /etc/cron.d/schedule.txt
 RUN crontab /etc/cron.d/schedule.txt
 
 ########## Keep Container Running ##########
-CMD ["tail", "-f", "/dev/null"]
+CMD ["cron", "&&","tail", "-f", "/dev/null"]
