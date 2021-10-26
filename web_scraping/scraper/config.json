@@ -7,13 +7,13 @@
       "channels": [
         {
           "name": "teknologi",
-          "category": "teknologi",
+          "category": "technology",
           "url": "https://tekno.kompas.com/search/",
           "type": "path"
         },
         {
           "name": "bola",
-          "category": "olahraga",
+          "category": "sport",
           "url": "https://indeks.kompas.com/?site=bola",
           "type": "query"
         },
@@ -37,13 +37,13 @@
       "channels": [
         {
           "name": "teknologi",
-          "category": "teknologi",
+          "category": "technology",
           "url": "https://www.cnnindonesia.com/teknologi/indeks/8",
           "type": "query"
         },
         {
           "name": "olahraga",
-          "category": "olahraga",
+          "category": "sport",
           "url": "https://www.cnnindonesia.com/olahraga/indeks/7",
           "type": "query"
         },
