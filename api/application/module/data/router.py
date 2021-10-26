@@ -3,13 +3,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from application.utils import get_params
-from application.database import engine
 from .query import get_scraping_result
-
-# Prepare database session
-config_dir = "config"
-db_params = get_params(dir=config_dir, filename="db_params.json")
-get_db = engine.session_factory(**db_params)
 
 ##### Endpoint #####
 router = APIRouter(
@@ -24,8 +18,7 @@ def get_data(
     end_date: str = "yesterday",
     website: str = "all",
     category: str = "all",
-    native_category: str = "all",
-    db: Session = Depends(get_db)
+    native_category: str = "all"
 ):
     # Set default value for params
     start_date = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d") if (start_date == "yesterday") else start_date
@@ -39,7 +32,7 @@ def get_data(
     }
 
     # Query data
-    data = get_scraping_result(db, query_params)
+    data = [row for row in get_scraping_result(query_params)]
     rowcount = len(data)
     return {
         "request_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
