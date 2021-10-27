@@ -1,6 +1,7 @@
-from application.database.utils import cvt_str_to_regex
-
 from google.cloud import bigquery
+
+def cvt_str_to_regex(value):
+    return value if (value != "all") else "%"
 
 def get_scraping_result(query_params):
     pattern_cols = ["website", "category", "native_category"]

@@ -4,28 +4,38 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 
-# Tokenization
-vocab_path = os.path.join(os.getcwd(), "application", "module", "classify", "model", "vocabulary.txt")
-with open(vocab_path, "r", encoding="utf-8") as file:
-    vocab = file.readlines()
+from google.cloud import storage
+storage_client = storage.Client()
+bucket = storage_client.get_bucket("dmt_share_leorio")
+
+# Vocabulary
+vocab_str = bucket.get_blob('api_metadata/vocabulary.txt').download_as_text()
+vocab = [word.strip() for word in vocab_str.split("\n")]
 vocab_size = len(vocab)
 
-word_tokens_path = os.path.join(os.getcwd(), "application", "module", "classify", "model", "vocabulary.txt")
-with open(word_tokens_path, "r", encoding="utf-8") as file:
-    raw_word_tokens = file.readlines()
+# Word Tokens
+word_tokens_str = bucket.get_blob('api_metadata/word_tokens.txt').download_as_text()
 word_tokens = [
-    [token.strip().replace("'", "").strip()
-    for word_token in raw_word_tokens for token in word_token.strip().strip("[]").split(",")]
+    [
+        word.strip()
+        for word in word_token.strip("[]").split(",")
+    ]
+    for word_token in word_tokens_str.replace("'", "").split("\n")
 ]
 
+# Initialize Word Tokens
 tokenizer = Tokenizer(num_words=vocab_size)
 tokenizer.fit_on_texts(word_tokens)
 
-# Model
-model_path = os.path.join(os.getcwd(), "application", "module", "classify", "model", "classifier.h5")
-model = tf.keras.models.load_model(model_path)
+model = None
 
 def classify_title(title):
+    global model
+    if (model is None):
+        model_path = os.path.join("/tmp", "model.h5")
+        bucket.get_blob('api_metadata/model/classifier.h5').download_to_filename(model_path)
+        model = tf.keras.models.load_model(model_path)
+    
     maxlen = 19
     category = ["entertainment", "lifestyle", "sport", "technology"]
 

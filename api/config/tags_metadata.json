@@ -4,7 +4,7 @@
         "description": "Operation to interract with historical scraping result dataset"
     },
     {
-        "name": "Log",
-        "description": "Operation to interract with model performance logs dataset"
+        "name": "Classify",
+        "description": "Operation to interract with classification model"
     }
 ]

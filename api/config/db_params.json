@@ -1,7 +1,0 @@
-{
-  "username": "admin",
-  "password": "admin",
-  "hostname": "database",
-  "port": 5432,
-  "database": "dmt_share"
-}
