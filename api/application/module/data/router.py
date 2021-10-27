@@ -1,8 +1,6 @@
 from datetime import datetime, timedelta
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
+from fastapi import APIRouter
 
-from application.utils import get_params
 from .query import get_scraping_result
 
 ##### Endpoint #####

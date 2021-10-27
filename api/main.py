@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 
 from application.utils import get_params
-from application.module import data, log
+from application.module import data, log, classify
 
 # Load config
 project_dir = os.path.dirname(os.path.realpath(__file__))
@@ -19,3 +19,4 @@ app = FastAPI(
 )
 app.include_router(data.router, tags=["Data"])
 app.include_router(log.router, tags=["Log"])
+app.include_router(classify.router, tags=["Classify"])
