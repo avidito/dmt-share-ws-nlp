@@ -331,10 +331,10 @@
             $("#result-section").show()
 
             var proba = response.probability
-            $("#ctg-entertainment-proba").text((proba[0] * 100).toFixed(2) + " %")
-            $("#ctg-lifestyle-proba").text((proba[1] * 100).toFixed(2) + " %")
-            $("#ctg-technology-proba").text((proba[2] * 100).toFixed(2) + " %")
-            $("#ctg-sport-proba").text((proba[3] * 100).toFixed(2) + " %")
+            $("#ctg-entertainment-proba").text((proba.entertainment * 100).toFixed(2) + " %")
+            $("#ctg-lifestyle-proba").text((proba.lifestyle * 100).toFixed(2) + " %")
+            $("#ctg-sport-proba").text((proba.sport * 100).toFixed(2) + " %")
+            $("#ctg-technology-proba").text((proba.technology * 100).toFixed(2) + " %")
           },
           fail: function() {
             $("#loading").text("Error while classifying, please try again.")
