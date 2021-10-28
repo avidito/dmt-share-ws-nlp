@@ -1,5 +1,6 @@
 import os
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from application.utils import get_params
 from application.module import data, classify
@@ -16,6 +17,13 @@ app = FastAPI(
     description = "API to retrieve historical scraping result and model performance logs",
     version = "0.1",
     openapi_tags = tags_metadata
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ["*"],
+    allow_credentials = True,
+    allow_methods = ["GET"],
+    allow_headers = ["*"]
 )
 app.include_router(data.router, tags=["Data"])
 app.include_router(classify.router, tags=["Classify"])
