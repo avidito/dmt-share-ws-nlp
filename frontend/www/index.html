@@ -322,6 +322,7 @@
           type: "GET",
           url: "https://dmt-share.et.r.appspot.com/classify?title=%s",
           data: data,
+          headers: {'Access-Control-Allow-Origin': "*"},
           success: function(response) {
             console.log(response)
             $("#loading").text("")
