@@ -35,7 +35,7 @@ def classify_title(title):
         model_path = os.path.join("/tmp", "model.h5")
         bucket.get_blob('api_metadata/model/classifier.h5').download_to_filename(model_path)
         model = tf.keras.models.load_model(model_path)
-    
+
     maxlen = 19
     category = ["entertainment", "lifestyle", "sport", "technology"]
 
@@ -43,4 +43,7 @@ def classify_title(title):
     proba = model.predict(padded_token)
 
     result = category[np.argmax(proba[0])]
-    return result, proba[0].tolist()
+    ctg_proba = {
+        ctg: p for ctg, p in zip(category, proba[0])
+    }
+    return result, ctg_proba

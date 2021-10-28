@@ -3,6 +3,7 @@ result/
 tmp/
 data-volume/
 backup/
+test_*
 
 chromedriver
 
