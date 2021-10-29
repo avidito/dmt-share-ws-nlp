@@ -10,3 +10,7 @@ function classify_title(title){
         return Http.responseText
     }
 }
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
+}

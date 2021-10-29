@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
     <title>DMT Share: News Headline Classification</title>
 </head>
 
@@ -179,11 +178,11 @@
 
                     <div id="result-section" class="result-section" style="display: none">
                       <center>
-                          <h5 class="text-black">(Predict Result)</h5>
+                          <h5 class="text-black">Predict Result</h5>
                       </center>
                       <p id="result-title"></p>
                       <p id="result-category"></p>
-
+                      <br>
                       <table>
                         <tr>
                           <th>Category</th>
@@ -222,27 +221,27 @@
             <div class="row mb-5">
                 <div class="col-md-8 mx-auto text-center">
                     <h6 class="text-primary">TEAM</h6>
-                    <h1>Man Behind the Project</h1>
+                    <h1>Men Behind the Project</h1>
                     <p>We are Data Management Trainee from EDTS</p>
                 </div>
             </div>
             <div class="row justify-content-md-center">
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <center>
                         <div class="team-member card-effect">
                             <img src="img/leo.jfif" alt="">
                             <h5 class="mb-0 mt-4">Leonardi Fabianto</h5>
                             <p>DMT Data Engineer
                             </p>
-                            <br>
                             <div class="social-icons">
                                 <a href="https://github.com/avidito"><i class='bx bxl-github'></i></a>
                                 <a href="https://www.instagram.com/leonardifabianto/"><i class='bx bxl-instagram-alt'></i></a>
+                                <a href="https://www.linkedin.com/in/leonardifabianto/"><i class='bx bxl-linkedin'></i></a>
                             </div>
                         </div>
                     </center>
                 </div>
-                <div class="col-lg-3 col-sm-6">
+                <div class="col-lg-4 col-sm-6">
                     <center>
                         <div class="team-member card-effect">
                             <img src="img/rio.jfif" alt="">
@@ -251,6 +250,7 @@
                             <div class="social-icons">
                                 <a href="https://github.com/riojuliian"><i class='bx bxl-github'></i></a>
                                 <a href="https://www.instagram.com/riojuliian/"><i class='bx bxl-instagram-alt'></i></a>
+                                <a href="https://www.linkedin.com/in/riojuliian/"><i class='bx bxl-linkedin'></i></a>
                             </div>
                         </div>
                     </center>
@@ -316,7 +316,7 @@
         var data = form.serialize();
         console.log(data)
         $("#predict-button").hide()
-        $("#loading").text("Classifying " + data.replace("%20", " ") + ". Please wait...")
+        $("#loading").text("Classifying \"" + replaceAll(data, "%20", " ") + "\". Please wait...")
 
         $.ajax({
           type: "GET",
@@ -326,7 +326,7 @@
             console.log(response)
             $("#loading").text("")
             $("#predict-button").show()
-            $("#result-title").text(   "Title  : " + response.title)
+            $("#result-title").text("Title : " + response.title)
             $("#result-category").text("Result : " + response.category)
             $("#result-section").show()
 
