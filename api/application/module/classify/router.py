@@ -9,7 +9,7 @@ router = APIRouter(
 )
 
 @router.get("/")
-def classify(
+async def classify(
     title: str
 ):
     result, proba = classify_title(title)
