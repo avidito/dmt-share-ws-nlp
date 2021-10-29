@@ -11,7 +11,7 @@ router = APIRouter(
 @router.get(
     "/",
     summary = "Get historical data from start_time to end_time (inclusive)")
-def get_data(
+async def get_data(
     start_date: str = "yesterday",
     end_date: str = "yesterday",
     website: str = "all",

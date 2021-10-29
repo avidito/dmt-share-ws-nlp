@@ -8,7 +8,9 @@ router = APIRouter(
     prefix = "/classify"
 )
 
-@router.get("/")
+@router.get(
+    "/",
+    summary = "Get historical data from start_time to end_time (inclusive)")
 async def classify(
     title: str
 ):
